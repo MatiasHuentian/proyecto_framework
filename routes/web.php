@@ -22,5 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/ingreso', [UserController ::class, 'login'])->name('login.index');
-Route::get('/register', [UserControllerroller ::class, 'register'])->name('register.index');
+Route::get('/register', [UserController ::class, 'register'])->name('register.index');
 Route::get('/products',[ProductController::class,'index'])->name('products.index');
+Route::get('/editar',[ProductController::class,'edit'])->name('products.edit');
+Route::get('/create',[ProductController::class,'create'])->name('products.create');
