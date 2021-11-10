@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{ProductController, UserController};
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Route::get('/ingreso', [UserController ::class, 'login'])->name('login.index');
+Route::get('/register', [UserController ::class, 'register'])->name('register.index');
+Route::get('/products',[ProductController::class,'index'])->name('products.index');
+Route::get('/editar',[ProductController::class,'edit'])->name('products.edit');
+Route::get('/create',[ProductController::class,'create'])->name('products.create');
