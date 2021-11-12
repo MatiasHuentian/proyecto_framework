@@ -30,34 +30,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>    
-                            <td> </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> 
-                                <form action="EditProductos" method="POST">
-                                    <input type="hidden" name="cod_producto">
-                                    <input type="submit" value="Editar" class="btn btn-outline-warning btn-sm" > 
-                                </form>
-                            </td>
-                            <td> 
-                                <form action="DeleteProducto" method="POST">
-                                    <input type="hidden" name="cod_producto">
-                                    <input type="submit" value="Dar de baja" class="btn btn-outline-danger btn-sm" > 
-                                </form>
-                            </td>
-                            <td>
-                                <form action="DeleteProducto" method="POST">
-                                    <input type="hidden" name="cod_producto">
-                                    <input type="submit" value="Eliminar" class="btn btn-outline-danger btn-sm" > 
-                                </form>
-                            </td>                        
-                        </tr>
-                        
+                        {{-- [{"id":1,"codigo":"A01","descripcion":"descripcion","cantidad":10,"precio_venta":20,"is_active":1,"id_categories":3,"id_offices":3}] --}}
+                        @foreach ($products as $prod )
+                            <tr>    
+                                <td>{{ $prod->codigo }}</td>
+                                <td>{{ $prod->name }}</td>
+                                <td>{{ $prod->descripcion }}</td>
+                                <td>{{ $prod->nom_categoria }}</td>
+                                <td>{{ $prod->cantidad }}</td>
+                                <td>{{ $prod->precio_venta }}</td>
+                                <td>{{ $prod->nom_sucursal }}</td>
+                                <td> 
+                                    <form action="{{ url('/productos/editar') }}" method="GET">
+                                        <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
+                                        <input type="submit" value="Editar" class="btn btn-outline-warning btn-sm" > 
+                                    </form>
+                                </td>
+                                <td> 
+                                    <form action="DeleteProducto" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
+                                        <input type="submit" value="Dar de baja" class="btn btn-outline-danger btn-sm" > 
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ url('/productos/delete') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $prod->id }}">
+                                        <input type="submit" value="Eliminar" class="btn btn-outline-danger btn-sm" > 
+                                    </form>
+                                </td>                        
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </center>

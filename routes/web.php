@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{ProductController, UserController};
+use App\Http\Controllers\{ProductController, UserController , PageController};
 
 
 
@@ -17,12 +17,18 @@ use App\Http\Controllers\{ProductController, UserController};
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/home' , [PageController::class , 'index'] );
 
-Route::get('/ingreso', [UserController ::class, 'login'])->name('login.index');
-Route::get('/register', [UserController ::class, 'register'])->name('register.index');
-Route::get('/products',[ProductController::class,'index'])->name('products.index');
-Route::get('/editar',[ProductController::class,'edit'])->name('products.edit');
-Route::get('/create',[ProductController::class,'create'])->name('products.create');
+Route::get('/', [UserController ::class, 'login' ] );
+Route::get('/login', [UserController ::class, 'login' ]);
+Route::post('/login_user', [UserController ::class, 'user_login' ]);
+Route::get('/register', [UserController ::class, 'register' ]);
+Route::post('/register_user', [UserController ::class, 'user_register' ]);
+
+Route::get('/productos',[ProductController::class,'index' ]);
+Route::get('/productos/editar',[ProductController::class,'edit' ]);
+Route::post('/productos/actualizar',[ProductController::class,'update' ]);
+Route::get('/productos/create',[ProductController::class,'create' ]);
+Route::post('/productos/store' , [ ProductController::class,'store' ] );
+
+Route::post('/productos/delete' , [ ProductController::class,'delete' ] );

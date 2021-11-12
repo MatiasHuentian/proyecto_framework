@@ -1,20 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.app_login')
 
 @section('title' , 'Login')
 
 @section('content')
     @section('titulo', 'Bienvenidos')
-    <div class="position-absolute top-50 start-50 translate-middle">
+    <div class="d-flex justify-content-center">
         <div class="card" style="width: 20rem;">
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ url('/login_user') }}" method="POST">
+                    @csrf
                     <div class="mb-4">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control" id="email">
                     </div>
                     <div class="mb-4">
-                        <label for="pasword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <button type="submit" class="btn btn-primary ">Ingresar</button>
                 </form>
