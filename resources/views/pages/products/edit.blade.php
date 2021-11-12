@@ -7,17 +7,19 @@
     <div class="position-absolute top-50 start-50 translate-middle">
         <div class="card" style="width: 40rem;" >
             <div class="card-body">
-                <form action="" method="POST" class="row g-2">
+                <form action="{{ url('/productos/actualizar') }}" method="POST" class="row g-2">
+                    @csrf
+                    <input type="hidden" name="codigo" value="{{ $product->codigo }}">
                     <div class="col-md-6">
-                        <label for="nomProducto" class="form-label">Nombre Producto</label>
-                        <input type="nomProducto" class="form-control" id="nomProducto">
+                        <label for="name" class="form-label">Nombre Producto</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
                     </div>
                     <div class="col-md-6" >
-                        <label for="precio" class="form-label">Precio venta</label>
-                        <input type="precio" class="form-control" id="precio">
+                        <label for="precio_venta" class="form-label">precio venta</label>
+                        <input type="text" class="form-control" id="precio_venta" name="precio_venta" value="{{ $product->precio_venta }}">
                     </div>
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <textarea class="form-control" name="descripcion" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ $product->descripcion }}</textarea>
                         <label for="floatingTextarea2">Descripción</label>
                     </div>
                     <button type="submit" class="btn btn-warning">Actualizar</button>
