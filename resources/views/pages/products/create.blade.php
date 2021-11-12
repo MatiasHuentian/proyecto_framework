@@ -24,18 +24,18 @@
                         <label for="nom" class="form-label">Categoria</label>
                         <select class="form-select" name="nom_categoria">
                             <option selected>Categoria</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->nom_categoria }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="nom" class="form-label">Sucursal</label>
                         <select class="form-select" name="nom_sucursal">
                             <option selected>Sucursal</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            @foreach ($offices as $office)
+                                <option value="{{ $office->id }}">{{ $office->nom_sucursal }}</option>
+                            @endforeach
                         </select>
                     </div>   
                     <div class="col-md-4" >

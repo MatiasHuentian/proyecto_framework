@@ -27,12 +27,13 @@ class ProductController extends Controller
     }
 
     public function create(){
-        return view('pages.products.create');
+        $categories = DB::table('categories')->get();
+        $offices = DB::table('offices')->get();
+
+        return view('pages.products.create' , [ 'categories' => $categories  , 'offices' => $offices ] );
     }
 
-    public function store(Request $request){ //recibir la data
-        //"codigo":"011","name":"ropa","precio_venta":"111","nom_categoria":"1","nom_sucursal":"1","cantidad":"10","descripcion":"jsjnjqnsq"}
-        
+    public function store(Request $request){
         DB::table('products')->insert([
             'codigo' => $request->codigo,
             'name' => $request->name, 
