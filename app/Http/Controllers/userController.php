@@ -46,6 +46,6 @@ class UserController extends Controller
                 'id_positions' => $request->id_positions
             ]
         );
-        return view('pages.products.index');
+        return redirect('/productos');
     }
 }
