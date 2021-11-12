@@ -31,4 +31,6 @@ Route::post('/productos/actualizar',[ProductController::class,'update' ]);
 Route::get('/productos/create',[ProductController::class,'create' ]);
 Route::post('/productos/store' , [ ProductController::class,'store' ] );
 
+Route::post('/productos/subir_bajar' , [ ProductController::class,'subir_bajar' ] );
+
 Route::post('/productos/delete' , [ ProductController::class,'delete' ] );

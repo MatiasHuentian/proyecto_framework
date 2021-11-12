@@ -7,15 +7,23 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $products = DB::table('products')
             ->select()
             ->addSelect('offices.nom_sucursal' , 'categories.nom_categoria')
             ->join('categories', 'categories.id', '=', 'products.id_categories')
-            ->join('offices' , 'offices.id' , 'products.id_offices')
-        ->get();
-
-        return view('pages.products.index' , [ 'products' => $products ]);
+            ->join('offices' , 'offices.id' , 'products.id_offices');
+        if( $request->codigo){
+            $products->where('products.codigo' , 'LIKE' , "%$request->codigo%");
+        }
+        if( $request->sucursal){
+            $products->where('offices.nom_sucursal' , 'LIKE' , "%$request->sucursal%");
+        }
+        if( $request->nombre){
+            $products->where('name' , 'LIKE' , "%$request->nombre%");
+        }
+        $products = $products->get();
+        return view('pages.products.index' , [ 'products' => $products , 'request' => $request ]);
     }
 
     public function create(){
@@ -51,10 +59,26 @@ class ProductController extends Controller
 
     public function delete(Request $request)
     {
-        // return $request;
         DB::table('products')
-            ->Where( 'id' , '=' , $request->id)
+            ->Where( 'codigo' , '=' , $request->codigo)
         ->delete();
+
+        return redirect('/productos');
+    }
+
+    public function subir_bajar(Request $request)
+    {
+        if($request->is_active == 1){
+            $valor_active = 0;
+        }else{
+            $valor_active = 1;
+        }
+
+        DB::table('products')
+            ->where('codigo' , '=' , $request->codigo)
+        ->update([
+                'is_active' => $valor_active //$request->is_active == 1 ? 0:1,
+            ]);
 
         return redirect('/productos');
     }

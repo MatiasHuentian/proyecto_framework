@@ -7,9 +7,9 @@
     <div class="card col-md-10 mx-auto">
         <div class="card-body">
                 <form class="d-flex mb-4 mx-auto" >
-                    <input class="form-control me-2" type="search" placeholder="Codigo" name="codigo" aria-label="Search">
-                    <input class="form-control me-2" type="search" placeholder="Sucursal" name="sucursal" aria-label="Search">
-                    <input class="form-control me-2" type="search" placeholder="Nombre" name="nombre" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Codigo" name="codigo" value="{{ $request->codigo ?? null }}" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Sucursal" name="sucursal" value="{{ $request->sucursal ?? null }}" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Nombre" name="nombre" value="{{ $request->nombre ?? null }}" aria-label="Search">
                     <button class="btn btn-primary" type="submit">Buscar</button>
                 </form>
                 <table class="table table-info table-striped" style="width: 100%;">
@@ -47,18 +47,32 @@
                                     </form>
                                 </td>
                                 <td> 
-                                    <form action="DeleteProducto" method="POST">
+                                    <form action="{{ url('/productos/subir_bajar') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
-                                        <input type="submit" value="Dar de baja" class="btn btn-outline-danger btn-sm" > 
+                                        <input type="hidden" name="is_active" value="{{ $prod->is_active }}">
+                                        @if ($prod->is_active)
+                                            <input type="submit" value="Dar de baja" class="btn btn-outline-danger btn-sm" > 
+                                        @else
+                                            <input type="submit" value="Dar de alta" class="btn btn-outline-success btn-sm" > 
+                                        @endif
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ url('/productos/delete') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $prod->id }}">
-                                        <input type="submit" value="Eliminar" class="btn btn-outline-danger btn-sm" > 
-                                    </form>
+                                    @if (!$prod->is_active)
+                                        <form action="{{ url('/productos/delete') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
+                                            <input type="submit" value="Eliminar" class="btn btn-outline-danger btn-sm" > 
+                                        </form>
+                                    @else
+                                        <form action="{{ url('/productos/delete') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
+                                            <input type="submit" value="Eliminar" class="btn btn-outline-danger btn-sm disabled" disabled > 
+                                        </form>
+                                    @endif
+                                    
                                 </td>                        
                             </tr>
                         @endforeach
