@@ -4,8 +4,8 @@
 
 @section('content')
     @section('titulo', 'Registro')
-    <div class="text-center translate-middle">
-        <div class="card" style="width: 40rem;" >
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width: 50rem;">
             <div class="card-body">
                 <form action="{{ url('/register_user') }}" method="POST" class="row g-2">
                     @csrf
