@@ -43,7 +43,7 @@ class UserController extends Controller
                 'nombre' => $request->nombre ,
                 'apellido' => $request->apellido,
                 'contrasena' => $request->contrasena,
-                'id_positions' => $request->position
+                'id_positions' => $request->id_positions
             ]
         );
         return view('pages.products.index');
