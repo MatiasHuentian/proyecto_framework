@@ -40,9 +40,9 @@ class UserController extends Controller
         DB::table('tblusers')->insert(
             [
                 'email' => $request->email, 
-                'nombre' => $request->nom ,
-                'apellido' => $request->ape,
-                'contrasena' => $request->password,
+                'nombre' => $request->nombre ,
+                'apellido' => $request->apellido,
+                'contrasena' => $request->contrasena,
                 'id_positions' => $request->position
             ]
         );
