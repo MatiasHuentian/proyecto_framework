@@ -23,9 +23,11 @@
                             <th scope="col">Precio venta</th>
                             <th scope="col">Sucursal</th>
                             <th colspan="3">
+                            <form action="{{url('/productos/create')}}" method="GET">
                                 <div class="float-end">
                                     <button class="btn btn-sm btn-info" type="submit">Agregar producto</button>
                                 </div>
+                            </form>
                             </th>
                         </tr>
                     </thead>

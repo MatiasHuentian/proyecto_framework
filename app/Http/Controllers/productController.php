@@ -30,8 +30,19 @@ class ProductController extends Controller
         return view('pages.products.create');
     }
 
-    public function store(){
-        return view('pages.products.create');
+    public function store(Request $request){ //recibir la data
+        //"codigo":"011","name":"ropa","precio_venta":"111","nom_categoria":"1","nom_sucursal":"1","cantidad":"10","descripcion":"jsjnjqnsq"}
+        
+        DB::table('products')->insert([
+            'codigo' => $request->codigo,
+            'name' => $request->name, 
+            'precio_venta' =>$request->precio_venta,
+            'id_categories' =>$request->nom_categoria,
+            'id_offices' =>$request->nom_sucursal,
+            'cantidad' =>$request->cantidad,
+            'descripcion' =>$request->descripcion
+        ]);
+        return redirect('/productos');
     }
     
     public function edit(Request $request){
