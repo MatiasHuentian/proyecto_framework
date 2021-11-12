@@ -6,7 +6,7 @@
     @section('titulo', 'Productos')
     <div class="card col-md-10 mx-auto">
         <div class="card-body">
-                <form class="d-flex mb-4 mx-auto" >
+                <form class="d-flex mb-4 mx-auto">
                     <input class="form-control me-2" type="search" placeholder="Codigo" name="codigo" aria-label="Search">
                     <input class="form-control me-2" type="search" placeholder="Sucursal" name="sucursal" aria-label="Search">
                     <input class="form-control me-2" type="search" placeholder="Nombre" name="nombre" aria-label="Search">
@@ -23,9 +23,11 @@
                             <th scope="col">Precio venta</th>
                             <th scope="col">Sucursal</th>
                             <th colspan="3">
+                            <form action="{{url('/productos/create')}}" method="GET">
                                 <div class="float-end">
                                     <button class="btn btn-sm btn-info" type="submit">Agregar producto</button>
                                 </div>
+                            </form>
                             </th>
                         </tr>
                     </thead>
