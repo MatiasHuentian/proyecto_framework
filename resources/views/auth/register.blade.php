@@ -1,41 +1,87 @@
-@extends('layouts.app_login')
-
-@section('title' , 'Registro')
+@extends('layouts.app')
 
 @section('content')
-    @section('titulo', 'Registro')
-    <div class="d-flex justify-content-center">
-        <div class="card" style="width: 50rem;">
-            <div class="card-body">
-                <form action="{{ url('/register_user') }}" method="POST" class="row g-2">
-                    @csrf
-                    <div class="col-md-6 ">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
-                    </div>
-                    <div class="col-md-6" >
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="contrasena" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contrasena" name="contrasena">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="id_positions" class="form-label">Cargo</label>
-                        <select class="form-select" name="id_positions">
-                            @foreach ( $positions as $position )
-                                <option value="{{ $position->id }}"> {{ $position->nom_cargos }} </option>
-                            @endforeach
-                        </select>
-                    </div>   
-                    <button type="submit" class="btn btn-success">Registrar</button>
-                </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="id_positions" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
+                            <div class="col-md-6">
+                                <select name="id_positions" id="id_positions" class="form-control" placeholder="-- Selecciones --">
+                                    <option value=""></option>
+                                    @foreach ( $positions as $position )
+                                        <option value="{{ $position->id }}"> {{ $position->nom_cargos }} </option>
+                                    @endforeach
+                                </select>
+                                @error('id_positions')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

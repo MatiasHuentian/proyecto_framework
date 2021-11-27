@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{ProductController, UserController , PageController};
 
@@ -20,10 +21,10 @@ use App\Http\Controllers\{ProductController, UserController , PageController};
 // Route::get('/home' , [PageController::class , 'index'] );
 
 Route::get('/', [UserController ::class, 'login' ] );
-Route::get('/login', [UserController ::class, 'login' ]);
-Route::post('/login_user', [UserController ::class, 'user_login' ]);
-Route::get('/register', [UserController ::class, 'register' ]);
-Route::post('/register_user', [UserController ::class, 'user_register' ]);
+// Route::get('/login', [UserController ::class, 'login' ]);
+// Route::post('/login_user', [UserController ::class, 'user_login' ]);
+// Route::get('/register', [UserController ::class, 'register' ]);
+// Route::post('/register_user', [UserController ::class, 'user_register' ]);
 
 Route::get('/productos',[ProductController::class,'index' ]);
 Route::get('/productos/editar',[ProductController::class,'edit' ]);
@@ -34,3 +35,6 @@ Route::post('/productos/store' , [ ProductController::class,'store' ] );
 Route::post('/productos/subir_bajar' , [ ProductController::class,'subir_bajar' ] );
 
 Route::post('/productos/delete' , [ ProductController::class,'delete' ] );
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
