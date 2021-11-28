@@ -10,9 +10,9 @@
                     <input class="form-control me-2" type="search" placeholder="Codigo" name="codigo" value="{{ $request->codigo ?? null }}" aria-label="Search">
                     <input class="form-control me-2" type="search" placeholder="Sucursal" name="sucursal" value="{{ $request->sucursal ?? null }}" aria-label="Search">
                     <input class="form-control me-2" type="search" placeholder="Nombre" name="nombre" value="{{ $request->nombre ?? null }}" aria-label="Search">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
+                    <button class="btn btn-success" type="submit">Buscar</button>
                 </form>
-                <table class="table table-info table-striped" style="width: 100%;">
+                <table class="table" style="width: 100%;">
                     <thead>
                         <tr>
                             <th scope="col">Codigo</th>
@@ -25,7 +25,7 @@
                             <th colspan="3">
                             <form action="{{url('/productos/create')}}" method="GET">
                                 <div class="float-end">
-                                    <button class="btn btn-sm btn-info" type="submit">Agregar producto</button>
+                                    <button class="btn btn-sm btn-primary float-right" type="submit">Agregar producto</button>
                                 </div>
                             </form>
                             </th>
@@ -45,7 +45,7 @@
                                 <td> 
                                     <form action="{{ url('/productos/editar') }}" method="GET">
                                         <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
-                                        <input type="submit" value="Editar" class="btn btn-outline-warning btn-sm" > 
+                                        <input type="submit" value="Editar" class="btn btn-warning btn-sm" > 
                                     </form>
                                 </td>
                                 <td> 
@@ -54,9 +54,9 @@
                                         <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
                                         <input type="hidden" name="is_active" value="{{ $prod->is_active }}">
                                         @if ($prod->is_active)
-                                            <input type="submit" value="Dar de baja" class="btn btn-outline-danger btn-sm" > 
+                                            <input type="submit" value="Dar de baja" class="btn btn-danger btn-sm" > 
                                         @else
-                                            <input type="submit" value="Dar de alta" class="btn btn-outline-success btn-sm" > 
+                                            <input type="submit" value="Dar de alta" class="btn btn-success btn-sm" > 
                                         @endif
                                     </form>
                                 </td>
@@ -65,7 +65,7 @@
                                         <form action="{{ url('/productos/delete') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="codigo" value="{{ $prod->codigo }}">
-                                            <input type="submit" value="Eliminar" class="btn btn-outline-danger btn-sm" > 
+                                            <input type="submit" value="Eliminar" class="btn btn-danger btn-sm" > 
                                         </form>
                                     @else
                                         <form action="{{ url('/productos/delete') }}" method="POST">
