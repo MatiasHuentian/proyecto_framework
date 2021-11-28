@@ -25,7 +25,7 @@
                             <th colspan="3">
                             <form action="{{url('/productos/create')}}" method="GET">
                                 <div class="float-end">
-                                    <button class="btn btn-sm btn-primary float-right" type="submit">Agregar producto</button>
+                                    <button class="btn btn-primary float-right" type="submit">Agregar producto</button>
                                 </div>
                             </form>
                             </th>
