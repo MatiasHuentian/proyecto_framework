@@ -6,10 +6,10 @@
     @section('titulo', 'Productos')
     <div class="card col-md-10 mx-auto">
         <div class="card-body">
-                <form class="d-flex mb-4 mx-auto" >
-                    <input class="form-control me-2" type="search" placeholder="Codigo" name="codigo" value="{{ $request->codigo ?? null }}" aria-label="Search">
-                    <input class="form-control me-2" type="search" placeholder="Sucursal" name="sucursal" value="{{ $request->sucursal ?? null }}" aria-label="Search">
-                    <input class="form-control me-2" type="search" placeholder="Nombre" name="nombre" value="{{ $request->nombre ?? null }}" aria-label="Search">
+                <form class="d-flex mb-4 mx-auto" action="{{ url('buscarProducto')}}"  >
+                    <input class="form-control me-2" type="search" placeholder="Código o nombre" name="search" value="" aria-label="Search" >
+                    {{-- <input class="form-control me-2" type="search" placeholder="Sucursal" name="sucursal" value="{{ $request->sucursal ?? null }}" aria-label="Search"> --}}
+                    {{-- <input class="form-control me-2" type="search" placeholder="Nombre" name="nombre" value="" aria-label="Search"> --}}
                     <button class="btn btn-success" type="submit">Buscar</button>
                 </form>
                 <table class="table" style="width: 100%;">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,18 +13,20 @@ class ProductController extends Controller
             ->select()
             ->addSelect('offices.nom_sucursal' , 'categories.nom_categoria')
             ->join('categories', 'categories.id', '=', 'products.id_categories')
-            ->join('offices' , 'offices.id' , 'products.id_offices');
-        if( $request->codigo){
-            $products->where('products.codigo' , 'LIKE' , "%$request->codigo%");
-        }
-        if( $request->sucursal){
-            $products->where('offices.nom_sucursal' , 'LIKE' , "%$request->sucursal%");
-        }
-        if( $request->nombre){
-            $products->where('name' , 'LIKE' , "%$request->nombre%");
-        }
-        $products = $products->get();
-        return view('pages.products.index' , [ 'products' => $products , 'request' => $request ]);
+            ->join('offices' , 'offices.id' , 'products.id_offices')
+        ->get();
+        // if( $request->codigo){
+        //     $products->where('products.codigo' , 'LIKE' , "%$request->codigo%");
+        // }
+        // if( $request->sucursal){
+        //     $products->where('offices.nom_sucursal' , 'LIKE' , "%$request->sucursal%");
+        // }
+        // if( $request->nombre){
+        //     $products->where('name' , 'LIKE' , "%$request->nombre%");
+        // }
+        return view('pages.products.index' , [ 'products' => $products 
+            // , 'request' => $request 
+        ]);
     }
 
     public function create(){
@@ -93,5 +96,23 @@ class ProductController extends Controller
             ]);
 
         return redirect('/productos');
+    }
+
+    public function searchProducto($search = null )
+    {
+        if(is_null($search)){
+            $search = \Request::get('search');
+            return redirect()->route('buscarProducto', array('search' => $search));
+        }
+
+        $products = Product::select()
+            ->addSelect('offices.nom_sucursal' , 'categories.nom_categoria')
+            ->join('categories', 'categories.id', '=', 'products.id_categories')
+            ->join('offices' , 'offices.id' , 'products.id_offices')
+            ->where('products.codigo' , 'LIKE' , "%$search%")
+            ->orWhere('products.name' , 'LIKE' , "%$search%")
+        ->get();
+
+        return view('pages.products.index' , ['products' => $products]);
     }
 }

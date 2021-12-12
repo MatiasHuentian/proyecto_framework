@@ -38,3 +38,5 @@ Route::post('/productos/delete' , [ ProductController::class,'delete' ] );
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/buscarProducto/{search?}', [App\Http\Controllers\ProductController::class, 'searchProducto'])->name('buscarProducto');
